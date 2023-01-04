@@ -1,0 +1,50 @@
+@import "https://fonts.googleapis.com/css2?family=Josefin+Sans";
+
+body {
+    font-family: 'Josefin Sans', Times, serif;
+}
+
+.card {
+    border: 1px solid var(--bs-secondary);
+    transition: transform 250ms;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.06);
+}
+
+#upBtn {
+    display: none;
+    position: fixed;
+    padding: 16px;
+    /* height: 40px;
+    width: 40px; */
+    bottom: 20px;
+    right: 30px;
+    z-index: 999;
+    border: 1px solid var(--bs-gray-800);
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+#upBtn:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
+.card-body::selection {
+    color: red;
+    font-size: 100px;
+}
+
+@media(min-width: 768px) {
+    .container {
+        border: 1px solid var(--bs-secondary);
+        border-radius: 12px;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+    }
+}
