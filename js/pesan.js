@@ -9,9 +9,13 @@ contact_form.addEventListener('submit', (e) => {
     const pesan = document.querySelector("textarea#pesan");
     const email = document.querySelector("input#email");
     $.ajax({
-        url: "https://q.fauzan-aditia.workers.dev/",
-        dataType: 'json', contentType: "application/json", type: "POST",
-        data: JSON.stringify({ name: name.value, pesan: pesan.value, email: email.value}),
+        url: "https://contact.pamungkas.ga/",
+        dataType: 'json',
+        contentType: "application/json",
+        type: "POST",
+        data: JSON.stringify(
+            {name: name.value, pesan: pesan.value, email: email.value}
+        ),
         success: e => {
             tata.success("", "<strong>Terimakasih!</strong> Pesan anda sudah kami terima.");
             btnLoading.classList.toggle('d-none');
@@ -20,6 +24,7 @@ contact_form.addEventListener('submit', (e) => {
         },
         error: err => {
             console.error(err);
+            contact_form.reset();
         }
     });
 });

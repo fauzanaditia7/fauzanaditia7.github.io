@@ -32,8 +32,7 @@ $(document).ready(() => {
     } else {
         parentHTML.setAttribute("data-bs-theme", "dark");
         setIcon("dark");
-    }
-    placeholderCard.forEach((e) => {
+    } placeholderCard.forEach((e) => {
         setTimeout(() => {
             e.classList.remove("placeholder")
         }, 2000);
@@ -46,13 +45,17 @@ const scrollFunction = a => {
     }
     return a.style.display = "none"
 };
-window.onscroll = a => {scrollFunction(upBtn)};
+window.onscroll = a => {
+    scrollFunction(upBtn)
+};
 
 upBtn.addEventListener("click", () => {
-    $("html, body").animate({ scrollTop: 0 }, "slow");
+    $("html, body").animate({
+        scrollTop: 0
+    }, "slow");
 });
 
 $("form:not(#contact-form)").on("submit", e => {
     e.preventDefault();
-    alert('Masih belum bisa cuy !!');
+    tata.error('Masih belum bisa cuy !!', '');
 });
