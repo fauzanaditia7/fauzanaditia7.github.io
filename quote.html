@@ -10,6 +10,27 @@
         <link rel="stylesheet" href="css/tata.css">
         <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
         <script src="js/tata.js"></script>
+        <script src="js/clipboard.js"></script>
+        <style>
+            .copy-q {
+                display: flex;
+                position: absolute;
+                right: -1px;
+                top: -1px;
+                color: var(--bs-body-color);
+                background: var(--bs-body-bg);
+                border: 1px solid var(--bs-secondary);
+                border-radius: 0 6px 0 6px;
+                width: 30px;
+                height: 30px;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .card:hover > .copy-q {
+                display: block !important;
+            }
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
@@ -61,15 +82,19 @@
         </div>
         <script>
             var main = $(".main");
+            var quotes = []
             async function fetchData() {
                 return await(await fetch('https://dummyjson.com/quotes?limit=30&skip=3')).json();
             }
-
+            var i = 0;
             const addQ = (q, s) => {
                 const card = `
                 <div class="col mx-auto my-2">
                     <div class="card my-2 h-100 shadow-md">
-                        <div class="card-body">
+                        <button title="Copy Quote" onclick="copyQuote(${i});" class="d-none copy-q">
+                            <i class="fa-regular fa-paste"></i>
+                        </button>
+                        <div class="card-body mt-2">
                             <figure>
                                 <blockquote class="blockquote">
                                     <p>${q}</p>
@@ -79,13 +104,30 @@
                         </div>
                     </div>
                 </div>`;
+                quotes[i] = q;
+                i += 1;
                 main.append(card);
             };
+
             fetchData().then(data => {
                 data.quotes.forEach(q => {
                     addQ(q.quote, q.author);
                 });
             });
+
+            const copyQuote = id => {
+                copyToClipboard(quotes[id]);
+                tata.success("", "Sukses copy ke clipboard");
+            };
+
+            // $(document).on("click", () => {
+            //     document.querySelectorAll(".copy-q").forEach((btn) => {
+            //         btn.addEventListener("click", () => {
+            //             copyToClipboard(quotes[btn.getAttribute("data-id")]);
+            //             tata.success("", "Sukses copy ke clipboard");
+            //         });
+            //     });
+            // })
         </script>
         <script src="js/script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
